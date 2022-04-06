@@ -1,4 +1,4 @@
-package com.github.potamois.flinkfuse;
+package com.github.potamois.flink.fuse;
 
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.junit.jupiter.api.Test;

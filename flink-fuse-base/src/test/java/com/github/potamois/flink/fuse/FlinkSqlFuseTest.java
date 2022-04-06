@@ -1,4 +1,4 @@
-package com.github.potamois.flinkfuse;
+package com.github.potamois.flink.fuse;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
