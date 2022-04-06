@@ -93,7 +93,7 @@
                             </filters>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.github.potamois.flink.SqlFuse</mainClass>
+                                    <mainClass>com.github.potamois.flink.FlinkSqlFuse</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
