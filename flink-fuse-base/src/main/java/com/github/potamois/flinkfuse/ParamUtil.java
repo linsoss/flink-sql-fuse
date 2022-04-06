@@ -1,4 +1,4 @@
-package com.github.potamois.flink;
+package com.github.potamois.flinkfuse;
 
 import org.apache.commons.lang3.tuple.Pair;
 

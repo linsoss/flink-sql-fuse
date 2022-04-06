@@ -1,4 +1,4 @@
-package com.github.potamois.flink;
+package com.github.potamois.flinkfuse;
 
 import java.util.List;
 import java.util.Properties;
