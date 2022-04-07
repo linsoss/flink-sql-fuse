@@ -1,7 +1,5 @@
 # Potamoi Fuse
 
-<img src="https://cdn.jsdelivr.net/gh/Al-assad/md-img@master/bucket-3/202204071651.jpeg" alt="97284042-2" style="zoom: 33%;" />
-
 Potamoi Fuse is a tiny shims for sumitting Flink-SQL job directly to cluster by specifying the sqls content with Java program arguments.
 
 The supported flink versions are as following:
@@ -11,6 +9,8 @@ The supported flink versions are as following:
 * Flink-1.12.x
 * Flink-1.11.x
 
+<br>
+
 ## Usage
 
 The precompiled jars for `potamoi-fuse` can be found in the [release page](https://github.com/potamois/flink-fuse/releases), for example:
@@ -18,6 +18,8 @@ The precompiled jars for `potamoi-fuse` can be found in the [release page](https
 ```shell
 wget https://github.com/potamois/flink-fuse/releases/v0.2/flink-fuse-14-0.2.jar
 ```
+
+<br>
 
 ### Flink-session mode
 
@@ -69,6 +71,8 @@ insert into print_table select * from datagen_source
 
 The main reason for using base64 as the sql  format is that sql text contains command-line special characters such as `"` and `'`which may cause some unexpected parameters parsing error.
 
+<br>
+
 ### Flink-application mode
 
 In fact, flink-fuse works very well with flink-application mode on kubernetes.
@@ -118,6 +122,8 @@ EOF
     local:///opt/flink/artifacts/flink-fuse.jar \
     --sqls Y3JlYXRlIHRhYmxlIGRhdGFnZW5fc291cmNlICgKICAgIGZfc2VxdWVuY2UgaW50LAogICAgZl9yYW5kb20gaW50LAogICAgZl9yYW5kb21fc3RyIHN0cmluZwogICAgKSB3aXRoICgKICAgICdjb25uZWN0b3InID0gJ2RhdGFnZW4nCiAgICApOwpjcmVhdGUgdGFibGUgcHJpbnRfdGFibGUgd2l0aCAoJ2Nvbm5lY3RvcicgPSAncHJpbnQnKSBsaWtlIGRhdGFnZW5fc291cmNlIChleGNsdWRpbmcgYWxsKTsKaW5zZXJ0IGludG8gcHJpbnRfdGFibGUgc2VsZWN0ICogZnJvbSBkYXRhZ2VuX3NvdXJjZTs=
 ```
+
+<br>
 
 ## Build Project
 
