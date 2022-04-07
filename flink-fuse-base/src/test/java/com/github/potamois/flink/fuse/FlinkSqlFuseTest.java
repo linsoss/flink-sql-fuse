@@ -1,22 +1,24 @@
 package com.github.potamois.flink.fuse;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-@Ignore
+import static com.github.potamois.flink.fuse.ParamUtil.encodeBase64;
+
 public class FlinkSqlFuseTest {
     
     @Test
     public void testExecuteSql() {
         String[] args = new String[]{
-                "--sql.1", "create temporary table datagen_source (\n" +
+                "--sql.1", encodeBase64("create temporary table datagen_source (\n" +
                 "    f_sequence int,\n" +
                 "    f_random int,\n" +
                 "    f_random_str string\n" +
                 "  ) with (\n" +
                 "    'connector' = 'datagen'\n" +
-                "  )",
-                "--sql.2", "select * from datagen_source limit 100",
+                "  )"),
+                "--sql.2", encodeBase64("explain select * from datagen_source limit 100"),
         };
         new FlinkSqlFuse(args).launch();
     }
