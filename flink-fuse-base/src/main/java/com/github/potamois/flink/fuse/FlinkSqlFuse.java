@@ -31,7 +31,7 @@ public class FlinkSqlFuse {
             "|__|  |_____| |_| |__|__|_|_|_|_____|_____|  |__|  |_____|_____|_____| \n" +
             "                                                                       \n" +
             "potamoi-flink-fuse: v0.2                                               \n" +
-            "github: https://github.com/potamois                                    ";
+            "github: https://github.com/potamois/flink-fuse                          ";
     
     
     private final static Logger LOG = LoggerFactory.getLogger(FlinkSqlFuse.class);

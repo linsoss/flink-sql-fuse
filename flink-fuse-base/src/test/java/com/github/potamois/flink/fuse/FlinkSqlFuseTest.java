@@ -1,7 +1,5 @@
 package com.github.potamois.flink.fuse;
 
-
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static com.github.potamois.flink.fuse.ParamUtil.encodeBase64;
