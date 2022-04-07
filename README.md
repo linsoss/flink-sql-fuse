@@ -1,5 +1,5 @@
 # Potamoi Fuse
-  
+
 
 Potamoi Fuse is a tiny shims for sumitting Flink-SQL job directly to cluster by specifying the sqls content with Java program arguments.
 
@@ -9,8 +9,6 @@ The supported flink versions are as following:
 * Flink-1.13.x
 * Flink-1.12.x
 * Flink-1.11.x
-
-<br/>
 
 ## Usage
 
@@ -70,8 +68,6 @@ insert into print_table select * from datagen_source
 
 The main reason for using base64 as the sql  format is that sql text contains command-line special characters such as `"` and `'`which may cause some unexpected parameters parsing error.
 
-<br>
-
 ### Flink-application mode
 
 In fact, flink-fuse works very well with flink-application mode on kubernetes.
@@ -122,17 +118,15 @@ EOF
     --sqls Y3JlYXRlIHRhYmxlIGRhdGFnZW5fc291cmNlICgKICAgIGZfc2VxdWVuY2UgaW50LAogICAgZl9yYW5kb20gaW50LAogICAgZl9yYW5kb21fc3RyIHN0cmluZwogICAgKSB3aXRoICgKICAgICdjb25uZWN0b3InID0gJ2RhdGFnZW4nCiAgICApOwpjcmVhdGUgdGFibGUgcHJpbnRfdGFibGUgd2l0aCAoJ2Nvbm5lY3RvcicgPSAncHJpbnQnKSBsaWtlIGRhdGFnZW5fc291cmNlIChleGNsdWRpbmcgYWxsKTsKaW5zZXJ0IGludG8gcHJpbnRfdGFibGUgc2VsZWN0ICogZnJvbSBkYXRhZ2VuX3NvdXJjZTs=
 ```
 
-<br>
-
 ## Build Project
 
 ```shell
 mvn clean && install
 ```
-  
-  
+
 <br>
 
+<br>
 
 
 
