@@ -1,6 +1,6 @@
 # Potamoi Fuse
 
-![potamoi-flink-fuse](https://cdn.jsdelivr.net/gh/Al-assad/md-img@master/bucket-3/202204071712.png)
+![potamoi-flink-fuse](https://cdn.jsdelivr.net/gh/Al-assad/md-img@master/bucket-3/202204071755.png)
 
 Potamoi Fuse is a tiny shims for submitting Flink-SQL job directly to cluster by specifying the sqls content with Java program arguments.
 
