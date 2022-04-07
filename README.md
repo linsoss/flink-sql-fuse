@@ -71,6 +71,8 @@ insert into print_table select * from datagen_source
 
 The main reason for using base64 as the sql  format is that sql text contains command-line special characters such as `"` and `'`which may cause some unexpected parameters parsing error.
 
+<br>
+
 #### Flink-application mode
 
 In fact, flink-fuse works very well with flink-application mode on kubernetes.
