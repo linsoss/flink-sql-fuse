@@ -1,5 +1,7 @@
 # Potamoi Fuse
 
+![potamoi-flink-fuse](https://cdn.jsdelivr.net/gh/Al-assad/md-img@master/bucket-3/202204071755.png)
+
 Potamoi Fuse is a tiny shims for submitting Flink-SQL job directly to cluster by specifying the sqls content with Java program arguments.
 
 The supported flink versions are as following:
@@ -16,7 +18,7 @@ The supported flink versions are as following:
 The precompiled jars for `potamoi-fuse` can be found in the [release page](https://github.com/potamois/flink-fuse/releases), for example:
 
 ```shell
-wget https://github.com/potamois/flink-fuse/releases/v0.2/flink-fuse-14-0.2.jar
+wget https://github.com/potamois/flink-fuse/releases/download/v0.2/flink-fuse-14-0.2.jar
 ```
 
 <br>
@@ -89,7 +91,7 @@ spec:
   initContainers:
     - name: artifacts-fetcher
       image: cirrusci/wget:latest
-      command: [ 'wget', 'https://github.com/potamois/flink-fuse/releases/v0.2/flink-fuse-14-0.2.jar', '-O', '/flink-artifact/flink-fuse.jar' ]
+      command: [ 'wget', 'https://github.com/potamois/flink-fuse/releases/download/v0.2/flink-fuse-14-0.2.jar', '-O', '/flink-artifact/flink-fuse.jar' ]
       volumeMounts:
         - mountPath: /flink-artifact
           name: flink-artifact
