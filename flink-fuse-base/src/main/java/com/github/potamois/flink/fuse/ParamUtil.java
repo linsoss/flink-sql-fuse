@@ -3,12 +3,7 @@ package com.github.potamois.flink.fuse;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -42,7 +37,8 @@ public class ParamUtil {
                 .map(Pair::getLeft)
                 .map(props::getProperty)
                 .map(ParamUtil::decodeBase64)
-                .filter(e -> e != null && !e.isEmpty())
+                .filter(Objects::nonNull)
+                .map(String::trim)
                 .collect(Collectors.toList());
         if (lines != null && lines.size() > 0) {
             return lines;
@@ -53,7 +49,9 @@ public class ParamUtil {
             return new ArrayList<>();
         }
         return Arrays.stream(decodeBase64(sqls).split(";"))
-                .filter(e -> e != null && !e.isEmpty())
+                .filter(Objects::nonNull)
+                .map(String::trim)
+                .filter(e -> !e.isEmpty())
                 .collect(Collectors.toList());
     }
     
