@@ -7,7 +7,7 @@
     <groupId>com.github.potamois</groupId>
     <artifactId>flink-fuse</artifactId>
     <packaging>pom</packaging>
-    <version>0.2</version>
+    <version>0.3</version>
 
     <name>Flink Fuse</name>
 
@@ -20,14 +20,14 @@
     </developers>
 
     <properties>
-        <target.java.version>1.8</target.java.version>
+        <target.java.version>11</target.java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>${target.java.version}</maven.compiler.source>
         <maven.compiler.target>${target.java.version}</maven.compiler.target>
 
         <scala.binary.version>2.12</scala.binary.version>
-        <log4j.version>2.17.1</log4j.version>
-        <junit.version>5.8.2</junit.version>
+        <log4j.version>2.19.0</log4j.version>
+        <junit.version>5.9.0</junit.version>
     </properties>
 
     <modules>
@@ -36,6 +36,7 @@
         <module>flink-fuse-12</module>
         <module>flink-fuse-13</module>
         <module>flink-fuse-14</module>
+        <module>flink-fuse-15</module>
     </modules>
 
     <dependencies>
