@@ -30,7 +30,7 @@ public class FlinkSqlFuse {
             "|   __|  |  | | | |     | | | |  |  |-   -|  |   __|  |  |__   |   __| \n" +
             "|__|  |_____| |_| |__|__|_|_|_|_____|_____|  |__|  |_____|_____|_____| \n" +
             "                                                                       \n" +
-            "potamoi-flink-fuse: v0.2                                               \n" +
+            "potamoi-flink-fuse: v0.3                                               \n" +
             "github: https://github.com/potamois/flink-fuse                          ";
     
     
