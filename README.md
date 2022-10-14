@@ -19,7 +19,7 @@ The supported flink versions are as following:
 The precompiled jars for `potamoi-fuse` can be found in the [release page](https://github.com/potamois/flink-fuse/releases), for example:
 
 ```shell
-wget https://github.com/potamois/flink-fuse/releases/download/v0.2/flink-fuse-14-0.2.jar
+wget https://github.com/potamois/flink-fuse/releases/download/v0.3/flink-fuse-15-0.3.jar
 ```
 
 <br>
@@ -43,7 +43,7 @@ insert into print_table select * from datagen_source;
 
 ```shell
 # submit flink-sql job
-./bin/flink run .flink-fuse-14-0.2.jar --sqls Y3JlYXRlIHRhYmxlIGRhdGFnZW5fc291cmNlICgKICAgIGZfc2VxdWVuY2UgaW50LAogICAgZl9yYW5kb20gaW50LAogICAgZl9yYW5kb21fc3RyIHN0cmluZwogICAgKSB3aXRoICgKICAgICdjb25uZWN0b3InID0gJ2RhdGFnZW4nCiAgICApOwpjcmVhdGUgdGFibGUgcHJpbnRfdGFibGUgd2l0aCAoJ2Nvbm5lY3RvcicgPSAncHJpbnQnKSBsaWtlIGRhdGFnZW5fc291cmNlIChleGNsdWRpbmcgYWxsKTsKaW5zZXJ0IGludG8gcHJpbnRfdGFibGUgc2VsZWN0ICogZnJvbSBkYXRhZ2VuX3NvdXJjZTs=
+./bin/flink run .flink-fuse-15-0.3.jar --sqls Y3JlYXRlIHRhYmxlIGRhdGFnZW5fc291cmNlICgKICAgIGZfc2VxdWVuY2UgaW50LAogICAgZl9yYW5kb20gaW50LAogICAgZl9yYW5kb21fc3RyIHN0cmluZwogICAgKSB3aXRoICgKICAgICdjb25uZWN0b3InID0gJ2RhdGFnZW4nCiAgICApOwpjcmVhdGUgdGFibGUgcHJpbnRfdGFibGUgd2l0aCAoJ2Nvbm5lY3RvcicgPSAncHJpbnQnKSBsaWtlIGRhdGFnZW5fc291cmNlIChleGNsdWRpbmcgYWxsKTsKaW5zZXJ0IGludG8gcHJpbnRfdGFibGUgc2VsZWN0ICogZnJvbSBkYXRhZ2VuX3NvdXJjZTs=
 ```
 
 In addition, there is another prefix parameter `--sql.x` to specify a single sql text,  the `x` represents the execution sequence  number of the sql, which is used in some scenarios where the `";"` contained in the sql may conflict with the default split symbol. 
@@ -65,7 +65,7 @@ insert into print_table select * from datagen_source
 ```
 
 ```shell
-./bin/flink run .flink-fuse-14-0.2.jar  \
+./bin/flink run .flink-fuse-15-0.3.jar  \
   --sql.1 Y3JlYXRlIHRhYmxlIGRhdGFnZW5fc291cmNlICgKICAgIGZfc2VxdWVuY2UgaW50LAogICAgZl9yYW5kb20gaW50LAogICAgZl9yYW5kb21fc3RyIHN0cmluZwogICAgKSB3aXRoICgKICAgICdjb25uZWN0b3InID0gJ2RhdGFnZW4nCiAgICAp \
   --sql.2 Y3JlYXRlIHRhYmxlIHByaW50X3RhYmxlIHdpdGggKCdjb25uZWN0b3InID0gJ3ByaW50JykgbGlrZSBkYXRhZ2VuX3NvdXJjZSAoZXhjbHVkaW5nIGFsbCk= \
   --sql.3 
@@ -92,7 +92,7 @@ spec:
   initContainers:
     - name: artifacts-fetcher
       image: cirrusci/wget:latest
-      command: [ 'wget', 'https://github.com/potamois/flink-fuse/releases/download/v0.2/flink-fuse-14-0.2.jar', '-O', '/flink-artifact/flink-fuse.jar' ]
+      command: [ 'wget', 'https://github.com/potamois/flink-fuse/releases/download/v0.3/flink-fuse-15-0.3.jar', '-O', '/flink-artifact/flink-fuse.jar' ]
       volumeMounts:
         - mountPath: /flink-artifact
           name: flink-artifact
