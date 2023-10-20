@@ -1,4 +1,4 @@
-package com.github.potamois.flink.fuse;
+package com.github.linsoss.flink.fuse;
 
 import org.apache.calcite.avatica.util.Casing;
 import org.apache.calcite.avatica.util.Quoting;
