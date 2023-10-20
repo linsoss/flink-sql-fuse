@@ -4,23 +4,23 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.potamois</groupId>
+    <groupId>com.github.linsoss</groupId>
     <artifactId>flink-fuse</artifactId>
     <packaging>pom</packaging>
-    <version>0.3</version>
+    <version>0.4</version>
 
-    <name>Flink Fuse</name>
+    <name>Flink SQL Fuse</name>
 
     <developers>
         <developer>
-            <name>Al-assad</name>
-            <email>assad.dev@outlook.com</email>
+            <name>Linying Assad</name>
+            <email>linying@apache.org</email>
             <url>https://github.com/Al-assad</url>
         </developer>
     </developers>
 
     <properties>
-        <target.java.version>1.8</target.java.version>
+        <target.java.version>11</target.java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>${target.java.version}</maven.compiler.source>
         <maven.compiler.target>${target.java.version}</maven.compiler.target>
@@ -32,15 +32,13 @@
 
     <modules>
         <module>flink-fuse-base</module>
-        <module>flink-fuse-11</module>
-        <module>flink-fuse-12</module>
-        <module>flink-fuse-13</module>
-        <module>flink-fuse-14</module>
         <module>flink-fuse-15</module>
+        <module>flink-fuse-16</module>
+        <module>flink-fuse-17</module>
     </modules>
 
     <dependencies>
-        <!-- junit5 -->
+        <!-- junit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -72,7 +70,6 @@
             <version>${log4j.version}</version>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 
 </project>
