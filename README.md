@@ -64,10 +64,9 @@ insert into print_table select * from datagen_source; "
 
 ### Application Mode
 
-	In fact, Flink SQL Fuse was designed from the outset for Flink Kubernetes Application.
+In fact, Flink SQL Fuse was designed from the outset for Flink Kubernetes Application.
 
-
-	- Create a ConfigMap with SQL content, and save it as `flink-sql-configmap.yaml`
+- Create a ConfigMap with SQL content, and save it as `flink-sql-configmap.yaml`
 
     ```yaml
     apiVersion: v1
@@ -85,7 +84,7 @@ insert into print_table select * from datagen_source; "
         );  
         create table print_table with ('connector' = 'print') like datagen_source (excluding all);  
         insert into print_table select * from datagen_source;
-    ```
+  ```
 
 - Create a Flink Pod Template definition and save it as `flink-podtemplate.yaml`
 
