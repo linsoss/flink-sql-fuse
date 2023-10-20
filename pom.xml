@@ -33,6 +33,8 @@
     <modules>
         <module>flink-fuse-base</module>
         <module>flink-fuse-15</module>
+        <module>flink-fuse-16</module>
+        <module>flink-fuse-17</module>
     </modules>
 
     <dependencies>
