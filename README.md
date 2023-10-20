@@ -1,144 +1,147 @@
-# Potamoi Fuse
+# Flink SQL Fuse
 
-![potamoi-flink-fuse](https://cdn.jsdelivr.net/gh/Al-assad/md-img@master/bucket-3/202204071755.png)
+Flink SQL Fuse is a tiny shims for submitting Flink SQL job directly to cluster by specifying the sqls content with Java
+program arguments.
 
-Potamoi Fuse is a tiny shims for submitting Flink-SQL job directly to cluster by specifying the sqls content with Java program arguments.
+The supported Flink versions are as following:
 
-The supported flink versions are as following:
+- 1.17.x
+- 1.16.x
+- 1.15.x
 
-* Flink-1.15.x
-* Flink-1.14.x
-* Flink-1.13.x
-* Flink-1.12.x
-* Flink-1.11.x
+## Get Started
 
-<br>
+- Download the `flink-sql-fuse` JAR for the specified Flink version from
+  the [Release](https://github.com/linsoss/flink-sql-fuse/releases) page:
 
-## Usage
+    ```shell
+    wget https://github.com/linsoss/flink-sql-fuse/releases/download/v0.4/flink-fuse-17-0.4.jar
+    ```
 
-The precompiled jars for `potamoi-fuse` can be found in the [release page](https://github.com/potamois/flink-fuse/releases), for example:
+- Submit it to your local Flink cluster using the Flink CLI:
 
-```shell
-wget https://github.com/potamois/flink-fuse/releases/download/v0.3/flink-fuse-15-0.3.jar
-```
+    ```shell
+    # via flink cli tools
+    ./bin/flink run flink-fuse-17-0.4.jar --sqls "create table datagen_source (  
+        f_sequence int,  
+        f_random int,  
+        f_random_str string  
+        ) with (  
+        'connector' = 'datagen'  
+        );  
+    create table print_table with ('connector' = 'print') like datagen_source (excluding all);  
+    insert into print_table select * from datagen_source; "
+    ```
 
-<br>
+## Program parameters
 
-### Flink-session mode
+- `--sqls`  indicates a set of sql split by ";"
+- `--file` indicates the path of sql file;
 
-If you need to submit a flink job to the cluster with the following sql content,  you can quickly submit it via `potamoi-fuse.jar` by specifying the `-sqls`  program argument, which is the sql text in base64 format.
+## Submit to Flink Cluster on Kubernetes
 
-```sql
--- flink sql content
-create table datagen_source (
-    f_sequence int,
-    f_random int,
-    f_random_str string
-    ) with (
-    'connector' = 'datagen'
-    );
-create table print_table with ('connector' = 'print') like datagen_source (excluding all);
-insert into print_table select * from datagen_source;
-```
+### Session Mode
 
-```shell
-# submit flink-sql job
-./bin/flink run .flink-fuse-15-0.3.jar --sqls Y3JlYXRlIHRhYmxlIGRhdGFnZW5fc291cmNlICgKICAgIGZfc2VxdWVuY2UgaW50LAogICAgZl9yYW5kb20gaW50LAogICAgZl9yYW5kb21fc3RyIHN0cmluZwogICAgKSB3aXRoICgKICAgICdjb25uZWN0b3InID0gJ2RhdGFnZW4nCiAgICApOwpjcmVhdGUgdGFibGUgcHJpbnRfdGFibGUgd2l0aCAoJ2Nvbm5lY3RvcicgPSAncHJpbnQnKSBsaWtlIGRhdGFnZW5fc291cmNlIChleGNsdWRpbmcgYWxsKTsKaW5zZXJ0IGludG8gcHJpbnRfdGFibGUgc2VsZWN0ICogZnJvbSBkYXRhZ2VuX3NvdXJjZTs=
-```
-
-In addition, there is another prefix parameter `--sql.x` to specify a single sql text,  the `x` represents the execution sequence  number of the sql, which is used in some scenarios where the `";"` contained in the sql may conflict with the default split symbol. 
-
-```sql
--- flink sql content
--- sql.1
-create table datagen_source (
-    f_sequence int,
-    f_random int,
-    f_random_str string
-    ) with (
-    'connector' = 'datagen'
-    )
--- sql.2
-create table print_table with ('connector' = 'print') like datagen_source (excluding all)
--- sql.3
-insert into print_table select * from datagen_source
-```
+If you need to quickly submit a Flink SQL job to a Flink cluster deployed on Kubernetes in session mode, you can define
+your SQL content using the `--sqls` parameter of `flink-sql-fuse.jar`:
 
 ```shell
-./bin/flink run .flink-fuse-15-0.3.jar  \
-  --sql.1 Y3JlYXRlIHRhYmxlIGRhdGFnZW5fc291cmNlICgKICAgIGZfc2VxdWVuY2UgaW50LAogICAgZl9yYW5kb20gaW50LAogICAgZl9yYW5kb21fc3RyIHN0cmluZwogICAgKSB3aXRoICgKICAgICdjb25uZWN0b3InID0gJ2RhdGFnZW4nCiAgICAp \
-  --sql.2 Y3JlYXRlIHRhYmxlIHByaW50X3RhYmxlIHdpdGggKCdjb25uZWN0b3InID0gJ3ByaW50JykgbGlrZSBkYXRhZ2VuX3NvdXJjZSAoZXhjbHVkaW5nIGFsbCk= \
-  --sql.3 
-  aW5zZXJ0IGludG8gcHJpbnRfdGFibGUgc2VsZWN0ICogZnJvbSBkYXRhZ2VuX3NvdXJjZQ== 
+# via flink cli tools
+./bin/flink run \
+    --target kubernetes-session \
+    -Dkubernetes.cluster-id=${flink_k8s_cluster_id} \
+    -Dkubernetes.namespace=${flink_k8s_namespce} \
+    flink-fuse-17-0.4.jar --sqls "create table datagen_source (  
+    f_sequence int,  
+    f_random int,  
+    f_random_str string  
+    ) with (  
+    'connector' = 'datagen'  
+    );  
+create table print_table with ('connector' = 'print') like datagen_source (excluding all);  
+insert into print_table select * from datagen_source; "
 ```
 
-The main reason for using base64 as the sql  format is that sql text contains command-line special characters such as `"` and `'`which may cause some unexpected parameters parsing error.
+### Application Mode
 
-<br>
+	In fact, Flink SQL Fuse was designed from the outset for Flink Kubernetes Application.
 
-### Flink-application mode
 
-In fact, flink-fuse works very well with flink-application mode on kubernetes.
+	- Create a ConfigMap with SQL content, and save it as `flink-sql-configmap.yaml`
 
-```shell
-# create flink-pod-template file
-touch pod-template.yml
-cat>pod-template.yml<<EOF
-apiVersion: v1
-kind: Pod
-metadata:
-  name: pod-template
-spec:
-  initContainers:
-    - name: artifacts-fetcher
-      image: cirrusci/wget:latest
-      command: [ 'wget', 'https://github.com/potamois/flink-fuse/releases/download/v0.3/flink-fuse-15-0.3.jar', '-O', '/flink-artifact/flink-fuse.jar' ]
-      volumeMounts:
-        - mountPath: /flink-artifact
-          name: flink-artifact
-  containers:
-    - name: flink-main-container
-      volumeMounts:
-        - mountPath: /opt/flink/volumes/hostpath
-          name: flink-volume-hostpath
-        - mountPath: /opt/flink/artifacts
-          name: flink-artifact
-        - mountPath: /opt/flink/log
-          name: flink-logs
-  volumes:
-    - name: flink-volume-hostpath
-      hostPath:
-        path: /tmp
-        type: Directory
-    - name: flink-artifact
-      emptyDir: { }
-    - name: flink-logs
-      emptyDir: { }
-EOF
-      
-# launch a flink job on application-mode
-./bin/flink run-application \
-    --target kubernetes-application \
-    -Dkubernetes.cluster-id=flink-app \
-    -Dkubernetes.pod-template-file=pod-template.yml \
-    -Dkubernetes.container.image=flink:1.15 \
-    local:///opt/flink/artifacts/flink-fuse.jar \
-    --sqls Y3JlYXRlIHRhYmxlIGRhdGFnZW5fc291cmNlICgKICAgIGZfc2VxdWVuY2UgaW50LAogICAgZl9yYW5kb20gaW50LAogICAgZl9yYW5kb21fc3RyIHN0cmluZwogICAgKSB3aXRoICgKICAgICdjb25uZWN0b3InID0gJ2RhdGFnZW4nCiAgICApOwpjcmVhdGUgdGFibGUgcHJpbnRfdGFibGUgd2l0aCAoJ2Nvbm5lY3RvcicgPSAncHJpbnQnKSBsaWtlIGRhdGFnZW5fc291cmNlIChleGNsdWRpbmcgYWxsKTsKaW5zZXJ0IGludG8gcHJpbnRfdGFibGUgc2VsZWN0ICogZnJvbSBkYXRhZ2VuX3NvdXJjZTs=
-```
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: my-flink-sql
+    data:
+      run.sql: |
+        create table datagen_source (  
+          f_sequence int,  
+          f_random int,  
+          f_random_str string  
+          ) with (  
+          'connector' = 'datagen'  
+        );  
+        create table print_table with ('connector' = 'print') like datagen_source (excluding all);  
+        insert into print_table select * from datagen_source;
+    ```
 
-<br>
+- Create a Flink Pod Template definition and save it as `flink-podtemplate.yaml`
+
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: pod-template
+    spec:
+      initContainers:
+        - name: sql-fuse-fetcher
+          image: ghcr.io/linsoss/flink-sql-fuse:flink_1.17
+          volumeMounts:
+            - mountPath: /flink-artifact
+              name: flink-artifact
+              subPath: flink-sql-fuse.jar
+      containers:
+        - name: flink-main-container
+          volumeMounts:
+            - mountPath: /opt/flink/artifacts
+              name: flink-artifact
+            - mountPath: /opt/sql
+              name: sql-script
+      volumes:
+        - name: flink-artifact
+          emptyDir: { }
+        - name: sql-script
+          configMap:
+            name: my-flink-sql
+    ```
+
+- Submit the Flink application job:
+
+    ```shell
+    kubectl apply -f flink-sql-configmap.yaml 
+    
+    # vis flink cli tools
+    ./bin/flink run-application \  
+        --target kubernetes-application \  
+        -Dkubernetes.cluster-id=flink-app \  
+        -Dkubernetes.pod-template-file=flink-pod-template.yml \  
+        -Dkubernetes.container.image=flink:1.17 \  
+        local:///opt/flink/artifacts/flink-fuse.jar --file opt/sql/run.sql
+    ```
 
 ## Build Project
 
-```shell
-mvn clean && install
-```
+- Build Java Project
 
-<br>
+    ```other
+    make build
+    ```
 
-<br>
+- Build Docker image
 
-
-
-
+    ```shell
+    make build-image
+    ```
 
