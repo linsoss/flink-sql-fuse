@@ -1,14 +1,9 @@
 package com.github.potamois.flink.fuse;
 
-import org.apache.calcite.sql.parser.SqlParseException;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

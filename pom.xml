@@ -32,10 +32,6 @@
 
     <modules>
         <module>flink-fuse-base</module>
-        <module>flink-fuse-11</module>
-        <module>flink-fuse-12</module>
-        <module>flink-fuse-13</module>
-        <module>flink-fuse-14</module>
         <module>flink-fuse-15</module>
     </modules>
 
