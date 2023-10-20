@@ -2,22 +2,25 @@ package com.github.potamois.flink.fuse;
 
 import org.junit.jupiter.api.Test;
 
-import static com.github.potamois.flink.fuse.ParamUtil.encodeBase64;
+import java.io.IOException;
+
 
 public class FlinkSqlFuseTest {
-    
+
     @Test
-    public void testExecuteSql() {
-        String[] args = new String[]{
-                "--sql.1", encodeBase64("create temporary table datagen_source (\n" +
-                "    f_sequence int,\n" +
-                "    f_random int,\n" +
-                "    f_random_str string\n" +
-                "  ) with (\n" +
-                "    'connector' = 'datagen'\n" +
-                "  )"),
-                "--sql.2", encodeBase64("explain select * from datagen_source limit 100"),
-        };
+    public void testExecuteSql() throws IOException {
+        var sqls = "create temporary table datagen_source (f_sequence int,f_random int,f_random_str string) with ('connector' = 'datagen');" +
+                "select * from datagen_source limit 100";
+        String[] args = new String[]{"--sqls", sqls};
         new FlinkSqlFuse(args).launch();
     }
+
+    @Test
+    public void testExecuteSql2() throws IOException {
+        var classLoader = getClass().getClassLoader();
+        var filepath = classLoader.getResource("test2.sql").getFile();
+        String[] args = new String[]{"--file", filepath};
+        new FlinkSqlFuse(args).launch();
+    }
+
 }
